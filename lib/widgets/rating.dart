@@ -4,6 +4,7 @@ class Rating extends StatelessWidget {
   const Rating({super.key, required this.freelancerRate});
 
   final double freelancerRate;
+
   @override
   Widget build(BuildContext context) {
     return Container(

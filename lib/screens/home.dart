@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:session9/widgets/freelancer_info.dart';
-import 'package:session9/widgets/section_widget.dart';
+import '../widgets/widgets.dart';
 
 class Home extends StatelessWidget {
   Home({super.key});
@@ -10,6 +9,11 @@ class Home extends StatelessWidget {
     ["Mohammed", "App Developer", 4.7],
     ["Yara", "Web Developer", 4.8],
     ["Aseel", "Graphics Designer", 4.2],
+  ];
+  final List<List<dynamic>> servicesNamesAndDescription = [
+    ['Miss Zachary Will', 'Doloribus saepe aut necessit qui non qui.', 4.9],
+    ['Miss loveta darling', 'El mucha aut necessit qui non qui.', 4.3],
+    ['Miss Nails serv', 'Seneora la verse saepe aut necessit.', 3.5],
   ];
 
   @override
@@ -175,19 +179,28 @@ class Home extends StatelessWidget {
                 fit: BoxFit.fitWidth,
                 child: SectionWidget(sectionTitle: 'Top Services'),
               ),
-              SizedBox(height: 10),
-              Stack(
-                children: [
-                  Container(
-                    width: 157,
-                    height: 154,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(image: AssetImage('assets/images/6.png'))
-                    ),
-                  )
-                ],
-              )
-              //   SizedBox(height: 120),
+              SizedBox(height: 20),
+              SizedBox(
+                height: 180,
+                child: ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  itemCount: 3,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.only(top: 4, right: 10),
+                      child: ServiceInfo(
+                        serviceRate: servicesNamesAndDescription[index][2],
+                        serviceDescription:
+                            servicesNamesAndDescription[index][1],
+                        serverJob: infoOfFreelances[index][1],
+                        serviceName: servicesNamesAndDescription[index][0],
+                        cardImageNumber: index + 2,
+                        serviceImage: 'assets/images/${index + 6}.png',
+                      ),
+                    );
+                  },
+                ),
+              ),
             ],
           ),
         ),
