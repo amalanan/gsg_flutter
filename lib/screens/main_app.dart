@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
 
-  // final TabController controller = TabController(length: 3, vsync:)
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,10 +29,6 @@ class MainApp extends StatelessWidget {
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       color: Colors.white,
-                      /*borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(15),
-                        bottomRight: Radius.circular(15),
-                      ),*/
                       border: Border.all(color: Colors.black, width: 2),
                       image: DecorationImage(
                         image: AssetImage('assets/images/16.jpg'),
