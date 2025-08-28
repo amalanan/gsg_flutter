@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../routes.dart';
 import '../widgets/widgets.dart';
 
 class Home extends StatelessWidget {
@@ -8,9 +9,12 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(onPressed: () {
-          Navigator.pop(context);
-        }, icon: Icon(Icons.menu)),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pushReplacementNamed(context, Routes.login);
+          },
+          icon: Icon(Icons.menu),
+        ),
         title: Image.asset('assets/images/logo.png'),
         actions: [
           Icon(Icons.notifications_active),

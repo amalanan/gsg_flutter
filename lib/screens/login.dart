@@ -1,54 +1,71 @@
 import 'package:flutter/material.dart';
-import 'package:session9/screens/screens.dart';
-
+import '../routes.dart';
 import '../widgets/widgets.dart';
 
 class Login extends StatelessWidget {
   Login({super.key});
 
-  TextEditingController emailCont = TextEditingController();
-  TextEditingController passCont = TextEditingController();
+  final TextEditingController emailCont = TextEditingController();
+  final TextEditingController passCont = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Login')),
       body: Center(
-        child: Column(
-          children: [
-            Image.network(
-              'https://plus.unsplash.com/premium_photo-1681487814165-018814e29155?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bG9naW58ZW58MHx8MHx8fDA%3D',
-              height: 200,
-            ),
-            CustomTextField(hint: 'Email', fieldController: emailCont),
-            CustomTextField(
-              hint: 'Password',
-              isPassword: true,
-              fieldController: passCont,
-            ),
-            ElevatedButton(
-              onPressed: () => _login(context),
-              child: Text('Login'),
-            ),
-          ],
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              Image.network(
+                'https://plus.unsplash.com/premium_photo-1681487814165-018814e29155?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bG9naW58ZW58MHx8MHx8fDA%3D',
+                height: 200,
+              ),
+              CustomTextField(
+                hint: 'Email',
+                fieldController: emailCont,
+                validate: (email) {
+                  if (email!.contains('@') && email.contains('.')) return null;
+                  return 'Enter Valid Email';
+                },
+              ),
+              CustomTextField(
+                hint: 'Password',
+                isPassword: true,
+                fieldController: passCont,
+                validate: (password) {
+                  if (password!.length >= 8) return null;
+                  return 'Weak Password';
+                },
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.pushReplacementNamed(context, Routes.signup);
+                },
+                child: Text('didn\'t have an account?'),
+              ),
+              ElevatedButton(
+                onPressed: () => _login(context),
+                child: Text('Login'),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 
   _login(BuildContext context) {
-    var email = emailCont.text;
-    var password = passCont.text;
-    emailCont.clear();
-    passCont.clear();
-    if (email.isEmpty || password.isEmpty) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text('Enter valid Credentials')));
+    if (_formKey.currentState!.validate()) {
+      Navigator.pushReplacementNamed(context, Routes.home);
     } else {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => Home()),
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Enter Valid Credentials'),
+          duration: Duration(milliseconds: 500),
+          backgroundColor: Colors.red,
+        ),
       );
     }
   }
