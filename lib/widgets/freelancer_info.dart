@@ -30,9 +30,9 @@ class FreelancerInfo extends StatelessWidget {
             SizedBox(height: 3),
             Text(freelancerName, style: TextStyle(fontWeight: FontWeight.w600)),
             SizedBox(height: 2),
-            Text(freelancerJob, style: TextStyle(fontWeight: FontWeight.bold,)),
+            Text(freelancerJob, style: TextStyle(fontWeight: FontWeight.bold)),
             SizedBox(height: 4),
-            Rating(freelancerRate: freelancerRate)
+            Rating(freelancerRate: freelancerRate),
           ],
         ),
       ),

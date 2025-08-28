@@ -15,7 +15,7 @@ class SignUp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Signup')),
+      appBar: AppBar(title: Text('SignUp')),
       body: Center(
         child: Form(
           key: _formKey,
@@ -92,7 +92,9 @@ class SignUp extends StatelessWidget {
 
   _signup(BuildContext context) {
     if (_formKey.currentState!.validate()) {
-      Navigator.pushReplacementNamed(context, Routes.home);
+      Navigator.pushReplacementNamed(context, Routes.home,
+      arguments: nameController.text,
+      );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(

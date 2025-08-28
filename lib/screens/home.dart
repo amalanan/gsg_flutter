@@ -7,6 +7,7 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final String? name = ModalRoute.of(context)!.settings.arguments as String? ;
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -29,6 +30,13 @@ class Home extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: Text('Hello ${name ?? 'Guest'}')
+                )
+              ),
               SearchWidget(),
               SizedBox(height: 10),
               OfferWidget(),
