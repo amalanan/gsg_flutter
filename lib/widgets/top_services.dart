@@ -15,14 +15,7 @@ class TopServices extends StatelessWidget {
         itemBuilder: (context, index) {
           return Padding(
             padding: const EdgeInsets.only(top: 4, right: 10),
-            child: ServiceInfo(
-              serviceRate: servicesNamesAndDescription[index][2],
-              serviceDescription: servicesNamesAndDescription[index][1],
-              serverJob: infoOfFreelances[index][1],
-              serviceName: servicesNamesAndDescription[index][0],
-              cardImageNumber: index + 2,
-              serviceImage: 'assets/images/${index + 6}.png',
-            ),
+            child: ServiceInfo(model: servicesNamesAndDescription[index]),
           );
         },
       ),

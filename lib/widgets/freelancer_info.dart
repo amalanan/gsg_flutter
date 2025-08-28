@@ -1,19 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:session9/widgets/rating.dart';
 
-class FreelancerInfo extends StatelessWidget {
-  const FreelancerInfo({
-    super.key,
-    required this.freelancerName,
-    required this.freelancerJob,
-    required this.freelancerImage,
-    required this.freelancerRate,
-  });
+import '../models/models.dart';
 
-  final int freelancerImage;
-  final String freelancerName;
-  final String freelancerJob;
-  final double freelancerRate;
+class FreelancerInfo extends StatelessWidget {
+  const FreelancerInfo({super.key, required this.model});
+
+  final FreelancerModel model;
 
   @override
   Widget build(BuildContext context) {
@@ -24,15 +17,24 @@ class FreelancerInfo extends StatelessWidget {
         child: Column(
           children: [
             CircleAvatar(
-              backgroundImage: AssetImage('assets/images/$freelancerImage.png'),
+              backgroundImage: AssetImage(model.freelancerImage),
               radius: 35,
             ),
             SizedBox(height: 3),
-            Text(freelancerName, style: TextStyle(fontWeight: FontWeight.w600)),
+            Text(
+              model.freelancerName,
+              style: TextStyle(
+                fontWeight: FontWeight.w600,
+                color: Color(0xff827BEB),
+              ),
+            ),
             SizedBox(height: 2),
-            Text(freelancerJob, style: TextStyle(fontWeight: FontWeight.bold)),
+            Text(
+              model.freelancerJob,
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
             SizedBox(height: 4),
-            Rating(freelancerRate: freelancerRate),
+            Rating(freelancerRate: model.freelancerRate),
           ],
         ),
       ),

@@ -7,14 +7,15 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String? name = ModalRoute.of(context)!.settings.arguments as String? ;
+    final String? name = ModalRoute.of(context)!.settings.arguments as String?;
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
             Navigator.pushReplacementNamed(context, Routes.login);
           },
-          icon: Icon(Icons.menu),
+          icon: Icon(Icons.arrow_back_ios_new),
         ),
         title: Image.asset('assets/images/logo.png'),
         actions: [
@@ -34,8 +35,8 @@ class Home extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Align(
                   alignment: Alignment.topLeft,
-                  child: Text('Hello ${name ?? 'Guest'}')
-                )
+                  child: Text('Hello ${name ?? 'Guest'}'),
+                ),
               ),
               SearchWidget(),
               SizedBox(height: 10),

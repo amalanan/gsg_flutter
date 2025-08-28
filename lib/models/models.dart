@@ -1,0 +1,1 @@
+export 'freelancer_model.dart';

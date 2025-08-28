@@ -14,7 +14,7 @@ void main() {
         //  Routes.freelancerDetails: (context) => Login(),
 
       },
-      home: Login(),
+      home: MainApp(),
     ),
   );
 }

@@ -1,23 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:session9/models/service_model.dart';
 import 'package:session9/widgets/rating.dart';
 
 class ServiceInfo extends StatelessWidget {
   const ServiceInfo({
     super.key,
-    required this.serviceImage,
-    required this.cardImageNumber,
-    required this.serviceName,
-    required this.serverJob,
-    required this.serviceDescription,
-    required this.serviceRate,
+    required this.model
   });
 
-  final int cardImageNumber;
-  final String serviceImage;
-  final String serviceName;
-  final String serverJob;
-  final String serviceDescription;
-  final double serviceRate;
+  final ServiceModel model;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +25,7 @@ class ServiceInfo extends StatelessWidget {
               height: 190,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage(serviceImage),
+                  image: AssetImage(model.serviceImage),
                   fit: BoxFit.cover,
                 ),
                 borderRadius: BorderRadius.circular(20),
@@ -60,21 +51,21 @@ class ServiceInfo extends StatelessWidget {
                         minVerticalPadding: 10,
                         leading: CircleAvatar(
                           backgroundImage: AssetImage(
-                            'assets/images/$cardImageNumber.png',
+                           model.cardImage,
                           ),
                         ),
                         title: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              serviceName,
+                              model.serviceName,
                               style: TextStyle(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 16,
                               ),
                             ),
                             Text(
-                              serverJob,
+                              model.serverJob,
                               style: TextStyle(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 12,
@@ -84,7 +75,7 @@ class ServiceInfo extends StatelessWidget {
                           ],
                         ),
                         subtitle: Text(
-                          serviceDescription,
+                          model.serviceDescription,
                           style: TextStyle(fontSize: 10),
                         ),
                       ),
@@ -92,7 +83,7 @@ class ServiceInfo extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Rating(freelancerRate: serviceRate),
+                        Rating(freelancerRate: model.serviceRate),
                         SizedBox(width: 7),
                         InkWell(
                           onTap: () {},

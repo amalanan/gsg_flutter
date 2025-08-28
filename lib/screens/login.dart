@@ -16,40 +16,42 @@ class Login extends StatelessWidget {
       body: Center(
         child: Form(
           key: _formKey,
-          child: Column(
-            children: [
-              Image.network(
-                'https://plus.unsplash.com/premium_photo-1681487814165-018814e29155?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bG9naW58ZW58MHx8MHx8fDA%3D',
-                height: 200,
-              ),
-              CustomTextField(
-                hint: 'Email',
-                fieldController: emailCont,
-                validate: (email) {
-                  if (email!.contains('@') && email.contains('.')) return null;
-                  return 'Enter Valid Email';
-                },
-              ),
-              CustomTextField(
-                hint: 'Password',
-                isPassword: true,
-                fieldController: passCont,
-                validate: (password) {
-                  if (password!.length >= 8) return null;
-                  return 'Weak Password';
-                },
-              ),
-              TextButton(
-                onPressed: () {
-                  Navigator.pushReplacementNamed(context, Routes.signup);
-                },
-                child: Text('didn\'t have an account?'),
-              ),
-              ElevatedButton(
-                onPressed: () => _login(context),
-                child: Text('Login'),
-              ),
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Image.network(
+                  'https://plus.unsplash.com/premium_photo-1681487814165-018814e29155?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bG9naW58ZW58MHx8MHx8fDA%3D',
+                  height: 200,
+                ),
+                CustomTextField(
+                  hint: 'Email',
+                  fieldController: emailCont,
+                  validate: (email) {
+                    if (email!.contains('@') && email.contains('.')) return null;
+                    return 'Enter Valid Email';
+                  },
+                ),
+                CustomTextField(
+                  hint: 'Password',
+                  isPassword: true,
+                  fieldController: passCont,
+                  validate: (password) {
+                    if (password!.length >= 8) return null;
+                    return 'Weak Password';
+                  },
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.pushReplacementNamed(context, Routes.signup);
+                  },
+                  child: Text('didn\'t have an account?'),
+                ),
+                ElevatedButton(
+                  onPressed: () => _login(context),
+                  child: Text('Login'),
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -58,7 +60,11 @@ class Login extends StatelessWidget {
 
   _login(BuildContext context) {
     if (_formKey.currentState!.validate()) {
-      Navigator.pushReplacementNamed(context, Routes.home);
+      Navigator.pushReplacementNamed(
+        context,
+        Routes.home,
+        arguments: emailCont.text,
+      );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(

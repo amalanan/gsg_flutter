@@ -1,12 +1,56 @@
+import 'package:session9/models/service_model.dart';
 
-final List<List<dynamic>> infoOfFreelances = [
-  ["Wizard", "UI Designer", 4.5],
-  ["Mohammed", "App Developer", 4.7],
-  ["Yara", "Web Developer", 4.8],
-  ["Aseel", "Graphics Designer", 4.2],
+import '../models/models.dart';
+
+final List<FreelancerModel> infoOfFreelances = [
+  FreelancerModel(
+    freelancerName: "Wizard",
+    freelancerJob: "UI Designer",
+    freelancerImage: 'assets/images/2.png',
+    freelancerRate: 4.5,
+  ),
+  FreelancerModel(
+    freelancerName: "Mohammed",
+    freelancerJob: "App Designer",
+    freelancerImage: 'assets/images/3.png',
+    freelancerRate: 4.4,
+  ),
+  FreelancerModel(
+    freelancerName: "Yara",
+    freelancerJob: "Web Developer",
+    freelancerImage: 'assets/images/4.png',
+    freelancerRate: 3,
+  ),
+  FreelancerModel(
+    freelancerName: "Aseel",
+    freelancerJob: "Graphics Designer",
+    freelancerImage: 'assets/images/5.png',
+    freelancerRate: 2.4,
+  ),
 ];
-final List<List<dynamic>> servicesNamesAndDescription = [
-  ['Miss Zachary Will', 'Doloribus saepe aut necessit qui non qui.', 4.9],
-  ['Miss loveta darling', 'El mucha aut necessit qui non qui.', 4.3],
-  ['Miss Nails serv', 'Seneora la verse saepe aut necessit.', 3.5],
+final List<ServiceModel> servicesNamesAndDescription = [
+  ServiceModel(
+    serviceImage: 'assets/images/6.png',
+    cardImage: 'assets/images/2.png',
+    serviceName: 'Miss Zachary Will',
+    serverJob: infoOfFreelances[0].freelancerName,
+    serviceDescription: 'Doloribus saepe aut necessit qui non qui.',
+    serviceRate: 4.9,
+  ),
+  ServiceModel(
+    serviceImage: 'assets/images/7.png',
+    cardImage: 'assets/images/3.png',
+    serviceName: 'Miss loveta darling',
+    serverJob: infoOfFreelances[1].freelancerName,
+    serviceDescription: 'El mucha aut necessit qui non qui.',
+    serviceRate: 4.7,
+  ),
+  ServiceModel(
+    serviceImage: 'assets/images/8.png',
+    cardImage: 'assets/images/4.png',
+    serviceName: 'Miss Nails serv',
+    serverJob: infoOfFreelances[2].freelancerName,
+    serviceDescription: 'Seneora la verse saepe aut necessit.',
+    serviceRate: 3.9,
+  ),
 ];
