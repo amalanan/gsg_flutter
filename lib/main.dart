@@ -11,7 +11,7 @@ void main() {
         Routes.signup: (context) => SignUp(),
         Routes.home: (context) => Home(),
         Routes.main: (context) => MainApp(),
-        //  Routes.freelancerDetails: (context) => Login(),
+        Routes.freelancerDetails: (context) => FreelancerDetails(),
 
       },
       home: MainApp(),
