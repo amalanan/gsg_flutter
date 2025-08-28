@@ -6,3 +6,4 @@ export 'offer_widget.dart';
 export 'top_rated_freelances.dart';
 export 'top_services.dart';
 export 'search_widget.dart';
+export 'custom_text_field.dart';

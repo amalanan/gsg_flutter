@@ -8,7 +8,9 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: Icon(Icons.menu),
+        leading: IconButton(onPressed: () {
+          Navigator.pop(context);
+        }, icon: Icon(Icons.menu)),
         title: Image.asset('assets/images/logo.png'),
         actions: [
           Icon(Icons.notifications_active),
