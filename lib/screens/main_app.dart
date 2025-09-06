@@ -1,3 +1,5 @@
+import 'dart:developer';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:session9/routes.dart';
 
@@ -46,7 +48,20 @@ class _MainAppState extends State<MainApp> {
         //   bottom: TabBar(tabs: [Text('tab1'), Text('tab2'), Text('tab3')]),
       ),
       backgroundColor: Colors.grey,
-      body: Center(child: screens[index]),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                fetchData();
+              },
+              child: Text('fetch data'),
+            ),
+          ],
+        ),
+      ),
+      //  body: Center(child: screens[index]),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: index,
         onTap: (value) {
@@ -79,4 +94,14 @@ class _MainAppState extends State<MainApp> {
       ),
     );
   }
+
+  fetchData() async {
+    try {
+      var response = await http.get(Uri.parse('https://fakestoreapi.com/products'));
+      log(response.body);
+    } catch (e) {
+      log('Error fetching data: $e');
+    }
+  }
+
 }

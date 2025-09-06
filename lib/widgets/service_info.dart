@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:session9/models/service_model.dart';
 import 'package:session9/widgets/rating.dart';
-
 import '../routes.dart';
 
 class ServiceInfo extends StatelessWidget {

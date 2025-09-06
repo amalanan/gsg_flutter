@@ -2,12 +2,21 @@ import 'package:flutter/material.dart';
 import '../routes.dart';
 import '../widgets/widgets.dart';
 
-class Login extends StatelessWidget {
+class Login extends StatefulWidget {
   Login({super.key});
 
+  @override
+  State<Login> createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
   final TextEditingController emailCont = TextEditingController();
+
   final TextEditingController passCont = TextEditingController();
+
   final _formKey = GlobalKey<FormState>();
+
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +36,8 @@ class Login extends StatelessWidget {
                   hint: 'Email',
                   fieldController: emailCont,
                   validate: (email) {
-                    if (email!.contains('@') && email.contains('.')) return null;
+                    if (email!.contains('@') && email.contains('.'))
+                      return null;
                     return 'Enter Valid Email';
                   },
                 ),
@@ -48,7 +58,8 @@ class Login extends StatelessWidget {
                 ),
                 ElevatedButton(
                   onPressed: () => _login(context),
-                  child: Text('Login'),
+                  child:
+                      isLoading ? CircularProgressIndicator() : Text('Login'),
                 ),
               ],
             ),
@@ -58,7 +69,14 @@ class Login extends StatelessWidget {
     );
   }
 
-  _login(BuildContext context) {
+  _login(BuildContext context) async {
+    setState(() {
+      isLoading = true;
+    });
+    await Future.delayed(Duration(seconds: 2));
+    setState(() {
+      isLoading = false;
+    });
     if (_formKey.currentState!.validate()) {
       Navigator.pushReplacementNamed(
         context,
