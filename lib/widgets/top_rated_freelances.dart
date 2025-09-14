@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:session9/widgets/widgets.dart';
 
+<<<<<<< HEAD
 import '../data/data.dart';
+=======
+import '../home/data.dart';
+>>>>>>> ced879a4e675c1cfa05c213e0718699f54bcd5ba
 import '../models/models.dart';
 
 class TopRatedFreelances extends StatelessWidget {

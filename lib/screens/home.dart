@@ -8,6 +8,10 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final String? name = ModalRoute.of(context)!.settings.arguments as String?;
+<<<<<<< HEAD
+=======
+
+>>>>>>> ced879a4e675c1cfa05c213e0718699f54bcd5ba
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
