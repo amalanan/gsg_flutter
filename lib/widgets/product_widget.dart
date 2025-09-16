@@ -12,9 +12,7 @@ class ProductWidget extends StatelessWidget {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(
-            builder: (context) => ProductDetails(model: model),
-          ),
+          MaterialPageRoute(builder: (context) => ProductDetails(model: model)),
         );
       },
       leading: ClipRRect(
@@ -26,14 +24,10 @@ class ProductWidget extends StatelessWidget {
           fit: BoxFit.cover,
         ),
       ),
-      title: Text(
-        model.title,
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
-      ),
+      title: Text(model.title, maxLines: 1, overflow: TextOverflow.ellipsis),
       subtitle: Row(
         children: [
-          Text(model.rating?.toStringAsFixed(1) ?? '0'),
+          Text(model.rating.toStringAsFixed(1)),
           const Icon(Icons.star, color: Colors.amberAccent, size: 16),
           const SizedBox(width: 8),
           Text('\$${model.price}'),

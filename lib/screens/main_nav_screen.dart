@@ -1,12 +1,6 @@
-import 'dart:convert';
-import 'dart:developer';
-import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
-import 'package:session9/models/product_model.dart';
-import 'package:session9/routes.dart';
 import 'package:session9/screens/all_products.dart';
 import 'package:session9/screens/books.dart';
-import 'package:session9/widgets/product_widget.dart';
 
 class MainNavScreen extends StatefulWidget {
   const MainNavScreen({super.key});

@@ -3,15 +3,11 @@ import '../routes.dart';
 import '../widgets/widgets.dart';
 
 class Home extends StatelessWidget {
-  const Home({super.key});
-
+  Home({super.key,this.name});
+  String? name;
   @override
   Widget build(BuildContext context) {
-    final String? name = ModalRoute.of(context)!.settings.arguments as String?;
-<<<<<<< HEAD
-=======
-
->>>>>>> ced879a4e675c1cfa05c213e0718699f54bcd5ba
+    name = ModalRoute.of(context)!.settings.arguments as String?;
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(

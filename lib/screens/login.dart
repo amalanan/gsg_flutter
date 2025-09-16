@@ -4,7 +4,7 @@ import '../widgets/widgets.dart';
 
 class Login extends StatefulWidget {
   Login({super.key});
-
+  static const String userCredentialsKey = 'hasLoggedIn';
   @override
   State<Login> createState() => _LoginState();
 }
@@ -78,6 +78,7 @@ class _LoginState extends State<Login> {
       isLoading = false;
     });
     if (_formKey.currentState!.validate()) {
+      await loginUser(emailCont.text);
       Navigator.pushReplacementNamed(
         context,
         Routes.home,
@@ -92,5 +93,10 @@ class _LoginState extends State<Login> {
         ),
       );
     }
+  }
+
+  loginUser(String email) async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString(Login.userCredentialsKey, email);
   }
 }

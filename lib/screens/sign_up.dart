@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../routes.dart';
 import '../widgets/widgets.dart';
 
+// ignore: must_be_immutable
 class SignUp extends StatelessWidget {
   SignUp({super.key});
 

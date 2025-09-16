@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
-
+import 'package:session9/models/book_model.dart';
 class Books extends StatefulWidget {
   const Books({super.key});
   @override
@@ -9,7 +9,7 @@ class Books extends StatefulWidget {
 }
 
 class _BooksState extends State<Books> {
-  List books = [];
+  List<BookModel> books = [];
 
   @override
   void initState() {
@@ -29,13 +29,13 @@ class _BooksState extends State<Books> {
         var book = books[index];
         return ListTile(
           leading: Image.network(
-            book['cover'],
+            book.cover,
             width: 100,
             height: 100,
             fit: BoxFit.fill,
           ),
-          title: Text(book['title']),
-          subtitle: Text(book['description']),
+          title: Text(book.title),
+          subtitle: Text(book.description),
         );
       },
     );
@@ -48,8 +48,10 @@ class _BooksState extends State<Books> {
       );
       if (response.statusCode == 200) {
         var data = jsonDecode(response.body);
-        setState(() {
-          books = data;
+        data.map((e) {
+          setState(() {
+            books.add(BookModel.fromJson(e));
+          });
         });
       } else {
         debugPrint('Failed to load books: ${response.statusCode}');

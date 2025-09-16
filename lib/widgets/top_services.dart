@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:session9/widgets/service_info.dart';
-<<<<<<< HEAD
 import '../data/data.dart';
-=======
-import '../home/data.dart';
->>>>>>> ced879a4e675c1cfa05c213e0718699f54bcd5ba
 
 class TopServices extends StatelessWidget {
   const TopServices({super.key});
