@@ -9,8 +9,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.12.0"
-<<<<<<< HEAD
-=======
   boolean_selector:
     dependency: transitive
     description:
@@ -19,7 +17,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.2"
->>>>>>> ced879a4e675c1cfa05c213e0718699f54bcd5ba
   characters:
     dependency: transitive
     description:
@@ -61,19 +58,13 @@ packages:
     source: hosted
     version: "1.3.0"
   device_preview:
-<<<<<<< HEAD
     dependency: "direct main"
-=======
-    dependency: "direct dev"
->>>>>>> ced879a4e675c1cfa05c213e0718699f54bcd5ba
     description:
       name: device_preview
       sha256: a694acdd3894b4c7d600f4ee413afc4ff917f76026b97ab06575fe886429ef19
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0"
-<<<<<<< HEAD
-=======
   fake_async:
     dependency: transitive
     description:
@@ -82,7 +73,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.3.2"
->>>>>>> ced879a4e675c1cfa05c213e0718699f54bcd5ba
   ffi:
     dependency: transitive
     description:
@@ -104,8 +94,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-<<<<<<< HEAD
-=======
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -114,20 +102,16 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.0.0"
->>>>>>> ced879a4e675c1cfa05c213e0718699f54bcd5ba
   flutter_localizations:
     dependency: transitive
     description: flutter
     source: sdk
     version: "0.0.0"
-<<<<<<< HEAD
-=======
   flutter_test:
     dependency: "direct dev"
     description: flutter
     source: sdk
     version: "0.0.0"
->>>>>>> ced879a4e675c1cfa05c213e0718699f54bcd5ba
   flutter_web_plugins:
     dependency: transitive
     description: flutter
@@ -173,8 +157,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.9.0"
-<<<<<<< HEAD
-=======
   leak_tracker:
     dependency: transitive
     description:
@@ -215,7 +197,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.12.17"
->>>>>>> ced879a4e675c1cfa05c213e0718699f54bcd5ba
   material_color_utilities:
     dependency: transitive
     description:
@@ -297,7 +278,7 @@ packages:
     source: hosted
     version: "6.1.5+1"
   shared_preferences:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: shared_preferences
       sha256: "6e8bf70b7fef813df4e9a36f658ac46d107db4b4cfe1048b477d4e453a8159f5"
@@ -365,8 +346,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.10.1"
-<<<<<<< HEAD
-=======
   stack_trace:
     dependency: transitive
     description:
@@ -383,7 +362,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.4"
->>>>>>> ced879a4e675c1cfa05c213e0718699f54bcd5ba
   string_scanner:
     dependency: transitive
     description:
@@ -400,8 +378,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.2"
-<<<<<<< HEAD
-=======
   test_api:
     dependency: transitive
     description:
@@ -410,7 +386,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.7.4"
->>>>>>> ced879a4e675c1cfa05c213e0718699f54bcd5ba
   typed_data:
     dependency: transitive
     description:
@@ -427,8 +402,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.4"
-<<<<<<< HEAD
-=======
   vm_service:
     dependency: transitive
     description:
@@ -437,7 +410,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "14.3.1"
->>>>>>> ced879a4e675c1cfa05c213e0718699f54bcd5ba
   web:
     dependency: transitive
     description:

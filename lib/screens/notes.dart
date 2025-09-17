@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:session9/widgets/custom_text_field.dart';
 import 'package:session9/models/note_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class NotesScreen extends StatefulWidget {
   const NotesScreen({super.key});
@@ -24,14 +25,14 @@ class _NotesScreenState extends State<NotesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Notes')),
+      appBar: AppBar(title: const Text('Notes')),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           showModalBottomSheet(
             context: context,
             builder: (context) {
               return Container(
-                padding: EdgeInsets.all(40),
+                padding: const EdgeInsets.all(40),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -39,22 +40,27 @@ class _NotesScreenState extends State<NotesScreen> {
                       fieldController: titleController,
                       hint: 'title',
                     ),
-                     CustomTextField(
+                    CustomTextField(
                       fieldController: contentController,
                       hint: 'content',
                     ),
                     ElevatedButton(
                       onPressed: () {
                         setState(() {
-                          NoteModel note = NoteModel(title: titleController.text, date:'${DateTime.now().day} // ${DateTime.now().month}' , content: contentController.text)
+                          NoteModel note = NoteModel(
+                            title: titleController.text,
+                            date:
+                                '${DateTime.now().day}/${DateTime.now().month}',
+                            content: contentController.text,
+                          );
                           notes.add(note);
+                          updateList(); // ✅ Save to SharedPreferences
                           titleController.clear();
                           contentController.clear();
-                     //     updateList();
                           Navigator.pop(context);
                         });
                       },
-                      child: Text('add'),
+                      child: const Text('add'),
                     ),
                   ],
                 ),
@@ -62,61 +68,51 @@ class _NotesScreenState extends State<NotesScreen> {
             },
           );
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
-      body:
-          notes.isEmpty
-              ? Center(child: Text('there\'s nothing to show'))
-              : ListView.builder(
-                itemCount: notes.length,
-                itemBuilder: (context, index) {
-                  return Dismissible(
-                      background: Container(color: Colors.red),
-                      key: UniqueKey(),
-                      onDismissed: (direction) {
-                        setState(() {
-                          notes.removeAt(index);
-                          updateList();
-                          if (notes.length == 0) {
-                            setState(() {});
-                          }
-                        });
+      body: notes.isEmpty
+          ? const Center(child: Text('there\'s nothing to show'))
+          : ListView.builder(
+              itemCount: notes.length,
+              itemBuilder: (context, index) {
+                return Dismissible(
+                  background: Container(color: Colors.red),
+                  key: UniqueKey(),
+                  onDismissed: (direction) {
+                    setState(() {
+                      notes.removeAt(index);
+                      updateList();
+                    });
+                  },
+                  child: ListTile(
+                    title: Text(notes[index].title),
+                    subtitle: Text(notes[index].content),
+                    trailing: InkWell(
+                      onTap: () {
+                        print(notes[index].toJson()); // ✅ fixed
                       },
-                      child: ListTile(
-                        title: Text(notes[index].title),
-                        subtitle: Text(notes[index].content),
-                        trailing: InkWell(
-                        onTap: (){
-                        print(notes[index].toJson);
-                    },
-                    child:Text(notes[index].date),
-                      ),
-                      /* child: Container(
-                        width:  double.infinity,
-                        margin: EdgeInsets.all(15),
-                        padding: EdgeInsets.all(15),
-                        decoration: BoxDecoration(
-                          color: Colors.grey[200],
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        child: Text(notes[index]),
-                      ),*/
+                      child: Text(notes[index].date),
                     ),
-                  );
-                },
-              ),
+                  ),
+                );
+              },
+            ),
     );
   }
 
-  updateList() async {
+  Future<void> updateList() async {
     final prefs = await SharedPreferences.getInstance();
-    prefs.setStringList(notesKey, notes);
+    // convert list of NoteModel -> list of JSON strings
+    final stringList = notes.map((note) => note.toJson()).toList();
+    await prefs.setStringList(notesKey, stringList);
   }
 
-  fetchList() async {
+  Future<void> fetchList() async {
     final prefs = await SharedPreferences.getInstance();
+    final stringList = prefs.getStringList(notesKey) ?? [];
     setState(() {
-      notes = prefs.getStringList(notesKey) ?? [];
+      // convert list of JSON strings -> list of NoteModel
+      notes = stringList.map((note) => NoteModel.fromJson(note)).toList();
     });
   }
 }
