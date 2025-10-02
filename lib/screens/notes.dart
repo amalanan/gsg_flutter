@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:session9/widgets/custom_text_field.dart';
 import 'package:session9/models/note_model.dart';
@@ -102,17 +104,21 @@ class _NotesScreenState extends State<NotesScreen> {
 
   Future<void> updateList() async {
     final prefs = await SharedPreferences.getInstance();
-    // convert list of NoteModel -> list of JSON strings
-    final stringList = notes.map((note) => note.toJson()).toList();
-    await prefs.setStringList(notesKey, stringList);
+   List<String> notesAsString = [];
+   for(var note in this.notes){
+    notesAsString.add(note.toJson());
+   }
+    await prefs.setStringList(notesKey, notesAsString);
   }
 
   Future<void> fetchList() async {
     final prefs = await SharedPreferences.getInstance();
-    final stringList = prefs.getStringList(notesKey) ?? [];
-    setState(() {
-      // convert list of JSON strings -> list of NoteModel
-      notes = stringList.map((note) => NoteModel.fromJson(note)).toList();
-    });
+  var notesAsString = prefs.getStringList(notesKey) ?? [];
+  for (var n in notesAsString){
+NoteModel note = NoteModel.fromJson(n);
+setState(() {
+  notes.add(note);
+});
+  }
   }
 }

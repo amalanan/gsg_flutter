@@ -7,7 +7,7 @@ import 'package:session9/screens/notes.dart';
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   final prefs = await SharedPreferences.getInstance();
- String? email = prefs.getString(Login.userCredentialsKey);
+ prefs.getString(Login.userCredentialsKey);
   
   runApp(
     DevicePreview( 

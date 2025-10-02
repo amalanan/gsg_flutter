@@ -22,7 +22,7 @@ class NoteModel {
 
   /// Encode to JSON string
   String toJson() {
-    return jsonEncode(toMap());
+    return jsonEncode({"title": title, "date": date, "content": content});
   }
 
   /// Construct from a Map
