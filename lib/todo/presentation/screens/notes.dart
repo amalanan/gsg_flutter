@@ -1,9 +1,9 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
+import 'package:session9/todo/data/notes_shared_db.dart';
+import 'package:session9/todo/data/notes_sqlite_db.dart';
+import 'package:session9/todo/presentation/widgets/note_item.dart';
 import 'package:session9/widgets/custom_text_field.dart';
-import 'package:session9/models/note_model.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:session9/todo/data/note_model.dart';
 
 class NotesScreen extends StatefulWidget {
   const NotesScreen({super.key});
@@ -56,7 +56,8 @@ class _NotesScreenState extends State<NotesScreen> {
                             content: contentController.text,
                           );
                           notes.add(note);
-                          updateList(); // ✅ Save to SharedPreferences
+                          NotesSqliteDb.insertNoteToDo(note);
+                        //  NotesSharedDB.updateListAtDB(notes);
                           titleController.clear();
                           contentController.clear();
                           Navigator.pop(context);
@@ -72,53 +73,31 @@ class _NotesScreenState extends State<NotesScreen> {
         },
         child: const Icon(Icons.add),
       ),
-      body: notes.isEmpty
-          ? const Center(child: Text('there\'s nothing to show'))
-          : ListView.builder(
-              itemCount: notes.length,
-              itemBuilder: (context, index) {
-                return Dismissible(
-                  background: Container(color: Colors.red),
-                  key: UniqueKey(),
-                  onDismissed: (direction) {
-                    setState(() {
-                      notes.removeAt(index);
-                      updateList();
-                    });
-                  },
-                  child: ListTile(
-                    title: Text(notes[index].title),
-                    subtitle: Text(notes[index].content),
-                    trailing: InkWell(
-                      onTap: () {
-                        print(notes[index].toJson()); // ✅ fixed
-                      },
-                      child: Text(notes[index].date),
-                    ),
-                  ),
-                );
-              },
-            ),
+      body:
+          notes.isEmpty
+              ? const Center(child: Text('there\'s nothing to show'))
+              : ListView.builder(
+                itemCount: notes.length,
+                itemBuilder: (context, index) {
+                  return NoteItem(
+                    note: notes[index],
+                    onDismissed: (direction) {
+                      setState(() {
+                        notes.removeAt(index);
+                   //     NotesSharedDB.updateListAtDB(notes);
+                      });
+                    },
+                  );
+                },
+              ),
     );
   }
 
-  Future<void> updateList() async {
-    final prefs = await SharedPreferences.getInstance();
-   List<String> notesAsString = [];
-   for(var note in this.notes){
-    notesAsString.add(note.toJson());
-   }
-    await prefs.setStringList(notesKey, notesAsString);
-  }
-
-  Future<void> fetchList() async {
-    final prefs = await SharedPreferences.getInstance();
-  var notesAsString = prefs.getStringList(notesKey) ?? [];
-  for (var n in notesAsString){
-NoteModel note = NoteModel.fromJson(n);
-setState(() {
-  notes.add(note);
-});
-  }
+  fetchList() async {
+    NotesSqliteDb.getNotesFromDB();
+  //  var fetchedList = await NotesSharedDB.fetchListFromSharedDB();
+    setState(() async {
+ //     notes = fetchedList;
+    });
   }
 }

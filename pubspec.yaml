@@ -37,6 +37,7 @@ dependencies:
   http: ^1.5.0
   device_preview: ^1.2.0
   shared_preferences: ^2.5.3
+  sqflite: ^2.4.2
 
 dev_dependenciesm:
   flutter_test:

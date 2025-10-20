@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../routes.dart';
 import '../widgets/widgets.dart';
 
+// ignore: must_be_immutable
 class Home extends StatelessWidget {
   Home({super.key,this.name});
   String? name;

@@ -4,7 +4,7 @@ import '../routes.dart';
 import '../widgets/widgets.dart';
 
 class Login extends StatefulWidget {
-  Login({super.key});
+  const Login({super.key});
   static const String userCredentialsKey = 'hasLoggedIn';
   @override
   State<Login> createState() => _LoginState();
@@ -37,8 +37,9 @@ class _LoginState extends State<Login> {
                   hint: 'Email',
                   fieldController: emailCont,
                   validate: (email) {
-                    if (email!.contains('@') && email.contains('.'))
+                    if (email!.contains('@') && email.contains('.')) {
                       return null;
+                    }
                     return 'Enter Valid Email';
                   },
                 ),
@@ -81,11 +82,13 @@ class _LoginState extends State<Login> {
     if (_formKey.currentState!.validate()) {
       await loginUser(emailCont.text);
       Navigator.pushReplacementNamed(
+        // ignore: use_build_context_synchronously
         context,
         Routes.home,
         arguments: emailCont.text,
       );
     } else {
+      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Enter Valid Credentials'),
