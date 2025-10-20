@@ -47,21 +47,28 @@ class _NotesScreenState extends State<NotesScreen> {
                       hint: 'content',
                     ),
                     ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
+                        NoteModel note = NoteModel(
+                          title: titleController.text,
+                          date: '${DateTime.now().day}/${DateTime.now().month}',
+                          content: contentController.text,
+                        );
+                        var id = await NotesSqliteDb.insertNoteToDo(note);
+                    fetchList();
+                     /*   note = NoteModel(
+                          title: note.title,
+                          content: note.content,
+                          date: note.content,
+                          id: id,
+                        );*/
+
                         setState(() {
-                          NoteModel note = NoteModel(
-                            title: titleController.text,
-                            date:
-                                '${DateTime.now().day}/${DateTime.now().month}',
-                            content: contentController.text,
-                          );
                           notes.add(note);
-                          NotesSqliteDb.insertNoteToDo(note);
-                        //  NotesSharedDB.updateListAtDB(notes);
+                              });  //  NotesSharedDB.updateListAtDB(notes);
                           titleController.clear();
                           contentController.clear();
                           Navigator.pop(context);
-                        });
+                  
                       },
                       child: const Text('add'),
                     ),
@@ -83,8 +90,13 @@ class _NotesScreenState extends State<NotesScreen> {
                     note: notes[index],
                     onDismissed: (direction) {
                       setState(() {
+                        NotesSqliteDb.deleteNoteFromDB(notes[index]);
+
                         notes.removeAt(index);
-                   //     NotesSharedDB.updateListAtDB(notes);
+                        //     NotesSharedDB.updateListAtDB(notes);
+                        if (notes.length == 0) {
+                          setState(() {});
+                        }
                       });
                     },
                   );
@@ -94,10 +106,10 @@ class _NotesScreenState extends State<NotesScreen> {
   }
 
   fetchList() async {
-    NotesSqliteDb.getNotesFromDB();
-  //  var fetchedList = await NotesSharedDB.fetchListFromSharedDB();
+    var fetchedList = await NotesSqliteDb.getNotesFromDB();
+    //  var fetchedList = await NotesSharedDB.fetchListFromSharedDB();
     setState(() async {
- //     notes = fetchedList;
+      notes = fetchedList!;
     });
   }
 }

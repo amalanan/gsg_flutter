@@ -4,12 +4,14 @@ class NoteModel {
   String title;
   String date;
   String content;
-
+int id;
   NoteModel({
+     this.id = 0,
     required this.title,
     required this.date,
     required this.content,
   });
+
 
   /// Convert the model to a Map (JSON-serializable)
   Map<String, dynamic> toMap() {
@@ -31,6 +33,7 @@ class NoteModel {
       title: map['title'] ?? '',
       date: map['date'] ?? '',
       content: map['content'] ?? '',
+         id: map['id'] ?? 0
     );
   }
 
